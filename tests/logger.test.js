@@ -87,4 +87,21 @@ describe("Unit test function Logger", () => {
   test("Test N parameters; logTags, object, null", () => {
     Logger.info(["Tag1", "Tag2"], { "key": "value" }, null);
   });
+
+
+  // Tests on timestamp
+  test("Test N parameters; logTags, string, object after the timestamp is disabled", () => {
+    Logger.disableTimestamp();
+    Logger.info(["Tag1", "Tag2"], "string", { "key": "value" });
+  });
+  test("Test isTimestampEnable after disabling it", () => {
+    expect(Logger.isTimestampEnable()).toBeFalsy();
+  });
+  test("Test N parameters; logTags, string, string after the timestamp is re-enabled", () => {
+    Logger.enableTimestamp();
+    Logger.info(["Tag1", "Tag2"], "string", "string");
+  });
+  test("Test isTimestampEnable after renabling it", () => {
+    expect(Logger.isTimestampEnable()).toBeTruthy();
+  });
 });

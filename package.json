@@ -1,6 +1,6 @@
 {
   "name": "sagasphere_logger",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "sagasphere_logger",
   "main": "dist/sagasphere_logger.js",
   "module": "dist/sagasphere_logger.js",

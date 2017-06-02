@@ -6,6 +6,8 @@ const msgLevel = {
     error: chalk.red
 };
 
+let showTimestamp = true;
+
 function getDate() {
     let now = new Date(), nowStr = "";
 
@@ -23,11 +25,11 @@ function Log (level, tags = [], ...data) {
         console.warn("Null, undefined, or empty parameter(s).");
     }
     else {
-
-        let logStr = "", haveTags = true, haveObject = false;
+        let dateStr = "", logStr = "", haveTags = true, haveObject = false;
 
         // Default date tag
-        const dateStr = '[' + getDate() + ']';
+        if(showTimestamp)
+            dateStr = '[' + getDate() + ']';
 
         // Did we have 'data' ?
         if(data.length == 0){
@@ -86,7 +88,10 @@ function Log (level, tags = [], ...data) {
 export const SagaSphere_Logger = {
     info:   (tags, ...data) => Log(msgLevel.info, tags, ...data),
     warn:   (tags, ...data) => Log(msgLevel.warn, tags, ...data),
-    err:    (tags, ...data) => Log(msgLevel.error, tags, ...data)
+    err:    (tags, ...data) => Log(msgLevel.error, tags, ...data),
+    disableTimestamp: () => { showTimestamp = false },
+    enableTimestamp: () => { showTimestamp = true },
+    isTimestampEnable: () => { return showTimestamp; }
 };
 
 export default SagaSphere_Logger;
